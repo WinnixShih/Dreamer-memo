@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamer</title>
+    <link rel="stylesheet" href="./css/normalized.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="welcome">
+                <h3 id="date"></h3>
+                <h4>你好，<span id="userName"></span></h4>
+            </div>
+        </div>
+
+        <section class="main">
+            <div class="input">
+                <form id="searchForm" action="http://localhost:3000/search">
+                    <div class="textInput">
+                        <label for="people">搜尋人物:</label>
+                        <input type="text" id="people" name="people" placeholder="Search...">
+                    </div>
+                    <div class="submit">
+                        <button type="button" id="submitBtn" onclick="searchPeople()">送出</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+
+        </footer>
+    </div>
+    <script src="./script.js"></script>
+    <script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    position: relative;
+}
+html, body{
+    font-family: '微軟正黑體', 'arial';
+}
+
+.welcome, .input, .submit{
+    text-align: center;
+}
+
+.input label{
+    display: block;
+}
+
+.textInput, .descriptionInput{
+    /* border: solid 1px blue; */
+
+    display: block;
+    margin: 16px 12px;
+}
