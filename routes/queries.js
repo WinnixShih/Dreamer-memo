@@ -27,15 +27,14 @@ const getDreamByPeople = (req, res) => {
 }
 
 // * Add to database
-const addDream = (req, res) => {
-    console.log(req.body);
+const addDream = (req, res, next) => {
     const { people, thing, place, description } = req.body;
     pool.query(
-        `INSERT INTO dream (people, thing, place, comment)
+        `INSERT INTO dream (people, thing, place, description)
         VALUES ($1, $2, $3, $4) RETURNING *`, [people, thing, place, description],
         (err, result) => {
-            if (err) throw err;
-            res.status(200).send('New dream added');
+            if (err) return next(err)
+            res.redirect('/')
         }
     )
 };

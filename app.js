@@ -22,8 +22,19 @@ app.get('/search', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'search.html'));
 })
 
-// app.post('/add', db.addDream());
+app.post('/', db.addDream);
 
-// app.post('/', query.addDream);
+// ? Route not found error
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+})
+
+// ? All error handling
+app.use((err, req, res, next) => {
+    console.error(`Error: ${err.message}`);
+    res.status(err.status || 500).send(err.message ||'Internal Server Error');
+})
 
 app.listen(PORT, console.log(`App is now listening on ${PORT}`));

@@ -1,5 +1,3 @@
-const db = require('../routes/queries');
-
 const todayDate = new Date().toLocaleDateString();
 document.getElementById('date').textContent = todayDate;
 
