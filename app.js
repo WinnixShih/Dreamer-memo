@@ -18,15 +18,23 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
-app.get('/search', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'search.html'));
-})
+// * searching endpoint
+app.get('/search', db.getDreamByPeople);
+app.get('/search/all', db.getAllDream);
 
-app.post('/', db.addDream);
+// * adding endpoint
+app.post('/add', db.addDream);
+
+// * editing endpoint
+app.get('/edit', db.editDream)
+
+// * deleting endpoint
+app.delete('/delete', db.deleteDream);
+
 
 // ? Route not found error
 app.use((req, res, next) => {
-    const err = new Error('Not found');
+    const err = new Error('Page Not found');
     err.status = 404;
     next(err);
 })

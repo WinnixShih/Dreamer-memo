@@ -18,13 +18,13 @@
 
         <section class="main">
             <div class="input">
-                <form id="searchForm" action="http://localhost:3000/search">
+                <form id="searchForm" action="http://localhost:3000/search/result" method="get">
                     <div class="textInput">
                         <label for="people">搜尋人物:</label>
                         <input type="text" id="people" name="people" placeholder="Search...">
                     </div>
                     <div class="submit">
-                        <button type="button" id="submitBtn" onclick="searchPeople()">送出</button>
+                        <button type="submit" id="submitBtn">送出</button>
                     </div>
                 </form>
             </div>

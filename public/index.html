@@ -17,8 +17,10 @@
         </div>
 
         <section class="main">
+            <!-- * Adding part -->
+            <h2>---紀錄夢境---</h2>
             <div class="input">
-                <form action="http://localhost:3000" method="post">
+                <form action="http://localhost:3000/add" method="POST">
                     <div class="textInput">
                         <label for="people">人物</label>
                         <input type="text" id="people" name="people">
@@ -36,6 +38,70 @@
                     </div>
                 </form>
             </div>
+
+            <!-- * Searching part -->
+            <h2>---搜尋夢境---</h2>
+            <div class="input">
+                <!-- * Get all dreams -->
+                <form id="all" action="http://localhost:3000/search/all" method="GET">
+                    <div class="submit">
+                        <button type="submit" id="submitBtn">查看所有夢境</button>
+                    </div>
+                </form>
+                <form id="searchForm" action="http://localhost:3000/search" method="GET">
+                    <div class="textInput">
+                        <label for="people"><h3>依人物搜尋:</h3></label>
+                        <input type="text" id="people" name="people" placeholder="Search...">
+                    </div>
+                    <div class="submit">
+                        <button type="submit" id="submitBtn">送出</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- * editing dream -->
+            <h2>---編輯夢境---</h2>
+            <div class="input">
+                <form id="edit" action="http://localhost:3000/edit" method="GET">
+                    <div class="textInput">
+                        <label for="date"><h3>日期:</h3></label>
+                        <input type="text" id="date" name="date" placeholder="Search...">
+                    </div>
+                    <div class="submit">
+                        <button type="submit" id="submitBtn">編輯</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- * deleting dream -->
+            <h2>---刪除夢境---</h2>
+            <div class="input">
+                <form id="delete">
+                    <div class="selectInput">
+                        <!-- * choosing delete type using select dropbox -->
+                        <label for="deleteType"><h3>刪除方式:</h3></label>
+                        <select id="deleteType">
+                            <option value="id">id</option>
+                            <option value="date">date</option>
+                        </select>
+
+                        <!-- * dynamic showing input box -->
+                        <div class="textInput" id="deleteIdBox" style="display: block;">
+                            <label for="deleteId"><h3>id:</h3></label>
+                            <input type="text" id="deleteIdInput" name="id" placeholder="刪除夢境id...">
+                        </div>
+                        <div class="textInput" id="deleteDateBox" style="display: none;">
+                            <label for="deleteDate"><h3>日期:</h3></label>
+                            <input type="text" id="deleteDateInput" name="date" placeholder="刪除夢境日期...">
+                        </div>
+                        
+                        <div class="submit">
+                            <button type="button" onclick="deleteDream()">刪除</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </section>
 
         <footer class="footer">
