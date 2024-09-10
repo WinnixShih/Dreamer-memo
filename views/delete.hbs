@@ -1,0 +1,30 @@
+<section class="main">    
+    {{!-- * deleting dream --}}
+    <h2>---刪除夢境---</h2>
+    <div class="input">
+        <form id="delete">
+            <div class="selectInput">
+                <!-- * choosing delete type using select dropbox -->
+                <label for="deleteType"><h3>刪除方式:</h3></label>
+                <select id="deleteType">
+                    <option value="id">id</option>
+                    <option value="date">date</option>
+                </select>
+
+                {{!-- * dynamic showing input box --}}
+                <div class="textInput" id="deleteIdBox" style="display: block;">
+                    <label for="deleteId"><h3>id:</h3></label>
+                    <input type="text" id="deleteIdInput" name="id" placeholder="刪除夢境id...">
+                </div>
+                <div class="textInput" id="deleteDateBox" style="display: none;">
+                    <label for="deleteDate"><h3>日期:</h3></label>
+                    <input type="text" id="deleteDateInput" name="date" placeholder="刪除夢境日期...">
+                </div>
+                
+                <div class="submit">
+                    <button type="button" onclick="deleteDream()">刪除</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

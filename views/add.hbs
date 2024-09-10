@@ -1,0 +1,22 @@
+<section class="main">
+    <h2>---新增夢境---</h2>
+    <div class="input">
+        <form action="http://localhost:3000/add" method="POST">
+            <div class="textInput">
+                <label for="people">人物</label>
+                <input type="text" id="people" name="people">
+                <label for="thing">事物</label>
+                <input type="text" id="thing" name="thing">
+                <label for="place">地點</label>
+                <input type="text" id="place" name="place">
+            </div>
+            <div class="descriptionInput">
+                <label for="description">內容</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div class="submit">
+                <button type="submit" id="submitBtn">送出</button>
+            </div>
+        </form>
+    </div>
+</section>

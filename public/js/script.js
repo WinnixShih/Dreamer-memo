@@ -28,7 +28,6 @@ document.getElementById('deleteType').addEventListener('change',function() {
 const deleteDream = async () => {
     // * get the type of deletion
     const deleteType = document.getElementById('deleteType').value;
-    console.log(deleteType);
     // * 2 ways to delete data, id or date
     if (deleteType === 'date') {
         const targetDate = document.getElementById('deleteDateInput').value;
@@ -64,11 +63,12 @@ const deleteDream = async () => {
     }
 }
 
-const responseReply = (response) => {
+const responseReply = async (response) => {
     if (response.ok) {
-        console.log('Deleted dream successfully')
+        alert('Deleted dream successfully')
     } else {
-        alert('Error during deleting');
+        const message = await response.text()
+        alert(message);
     }
     return;
 }

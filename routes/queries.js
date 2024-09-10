@@ -34,7 +34,10 @@ const getDreamByPeople = async (req, res, next) => {
 // * Add to database
 const addDream = async (req, res, next) => {
     const { people, thing, place, description } = req.body;
-    const currentDate = new Date().toISOString();
+    const date = new Date();
+    const formatter = new Intl.DateTimeFormat('zh-TW', { dateStyle: 'short' });
+    const currentDate = formatter.format(date);
+    console.log(currentDate);
     try {
         const results = await  pool.query(`
             INSERT INTO dream (date, people, thing, place, description)
@@ -72,9 +75,9 @@ const deleteDream = async (req, res, next) => {
                 WHERE id = $1
                 RETURNING *`, [id]);
             if (results.rows.length === 0) {
-                return res.status(404).send(`No dream in id ${id}`);
+                return res.status(404).send(`No dream with id ${id}`);
             }
-            res.status(200).send(`Dream on the id ${id} was deleted`);
+            res.status(200).send(`Dream with id: ${id} was deleted`);
         } else if (date) {
             const results = await pool.query(`
                 DELETE FROM dream
@@ -83,7 +86,7 @@ const deleteDream = async (req, res, next) => {
             if (results.rows.length === 0) {
                 return res.status(404).send(`No dream on date ${date}`);
             }
-            res.status(200).send(`Dream on the date ${date} was deleted`);
+            res.status(200).send(`Dream on date: ${date} was deleted`);
         } else {
             res.status(400).send('No id or date provided');
         }

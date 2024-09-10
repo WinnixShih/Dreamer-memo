@@ -1,0 +1,21 @@
+<section class="main">    
+    {{!-- * Searching part --}}
+    <h2>---搜尋夢境---</h2>
+    <div class="input">
+        {{!-- * Get all dreams --}}
+        <form id="all" action="http://localhost:3000/search/all" method="GET">
+            <div class="submit">
+                <button type="submit" id="submitBtn">查看所有夢境</button>
+            </div>
+        </form>
+        <form id="searchForm" action="http://localhost:3000/search" method="GET">
+            <div class="textInput">
+                <label for="people"><h3>依人物搜尋:</h3></label>
+                <input type="text" id="people" name="people" placeholder="Search...">
+            </div>
+            <div class="submit">
+                <button type="submit" id="submitBtn">送出</button>
+            </div>
+        </form>
+    </div>
+</section>
