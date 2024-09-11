@@ -8,9 +8,9 @@ const getAllDream = async (req, res, next) => {
             ORDER BY date DESC
             `);
         if (results.rows.length < 1) {
-            return res.status(404).send('No dream recorded yet');
+            return res.status(204).render('notFound', { message: 'No dream recorded yet' });
         }
-        res.status(200).json(results.rows);
+        res.status(200).render('searchResults', { dreams: results.rows });
     } catch (err) {
         next(err);
     }
@@ -23,9 +23,10 @@ const getDreamByPeople = async (req, res, next) => {
             SELECT * FROM dream
             WHERE people = $1`, [people]);
         if (results.rows.length < 1) {
-            return res.status(404).send(`Can't find the dream related to ${people}`);
+            return res.status(204).render('notFound', { message: `Can't find the dream related to ${people}` });
         }
-        res.status(200).json(results.rows);
+        // ? results.rows is an array, length cannot directly use, check if it is an array
+        res.status(200).render('searchResults', { dreams: results.rows });
     } catch (err) {
         next(err);
     }

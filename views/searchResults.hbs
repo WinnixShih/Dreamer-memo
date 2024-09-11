@@ -1,0 +1,19 @@
+<section class="main">
+    <h2>Search Results for Dreams</h2>
+    {{!-- ? get the results --> dreams (it's an object) get the value using dot notation --}}
+    {{#if dreams.length}}
+        <ul>
+            {{#each dreams}}
+                <li>
+                    <h3>Date: {{this.date}}</h3>
+                    <p>People: {{this.people}}</p>
+                    <p>Thing: {{this.thing}}</p>
+                    <p>Place: {{this.place}}</p>
+                    <p>Description: {{this.description}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No results found</p>
+    {{/if}}
+</section>

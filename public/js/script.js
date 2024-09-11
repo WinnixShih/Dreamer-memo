@@ -1,29 +1,38 @@
-const todayDate = new Date().toLocaleDateString();
-document.getElementById('date').textContent = todayDate;
-
-const userName = 'Chuan';
-document.getElementById('userName').textContent = userName;
-
-// * input field
-const searchPeople = () => {
-    const form = document.getElementById('searchForm');
-    const people = form.people.value;
-    console.log(people);
+const dateElement = document.getElementById('date');
+if (dateElement) {
+    const todayDate = new Date().toLocaleDateString();
+    document.getElementById('date').textContent = todayDate;
 }
 
+const nameElement = document.getElementById('userName');
+if (nameElement) {
+    const userName = 'Chuan';
+    document.getElementById('userName').textContent = userName;
+}
+
+// * input field
+// const searchPeople = () => {
+//     const form = document.getElementById('searchForm');
+//     const people = form.people.value;
+//     console.log(people);
+// }
+
 // * for changing display in the front end, default is showing id input box
-document.getElementById('deleteType').addEventListener('change',function() {
-    // * using function() to use the <this> attribute
-    const deleteType = this.value;
-    // * showing the require input box
-    if (deleteType === 'id') {
-        document.getElementById('deleteIdBox').style.display = 'block';
-        document.getElementById('deleteDateBox').style.display = 'none';
-    } else if (deleteType === 'date') {
-        document.getElementById('deleteIdBox').style.display = 'none';
-        document.getElementById('deleteDateBox').style.display = 'block';
-    }
-});
+const deleteTypeElement = document.getElementById('deleteType');
+if (deleteTypeElement) {
+    document.getElementById('deleteType').addEventListener('change',function() {
+        // * using function() to use the <this> attribute
+        const deleteType = this.value;
+        // * showing the require input box
+        if (deleteType === 'id') {
+            document.getElementById('deleteIdBox').style.display = 'block';
+            document.getElementById('deleteDateBox').style.display = 'none';
+        } else if (deleteType === 'date') {
+            document.getElementById('deleteIdBox').style.display = 'none';
+            document.getElementById('deleteDateBox').style.display = 'block';
+        }
+    });
+}
 
 const deleteDream = async () => {
     // * get the type of deletion

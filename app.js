@@ -47,8 +47,9 @@ app.get('/delete', (req, res) => {
 // })
 
 // * searching endpoint
-app.get('/search', db.getDreamByPeople);
-app.get('/search/all', db.getAllDream);
+// ? provided endpoint need to name as the action target in html(hbs)
+app.get('/search/result', db.getDreamByPeople);
+app.get('/search/all/result', db.getAllDream);
 
 // * adding endpoint
 app.post('/add', db.addDream);
