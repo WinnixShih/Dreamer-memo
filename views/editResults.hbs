@@ -1,0 +1,34 @@
+<section class="main">
+    <h2>Edit Dream</h2>
+    {{#if dreams.length}}
+        {{#each dreams}}
+        <form id="editDreamForm" action="http://localhost:3000/edit/result" method="POST">
+            <div class="textInput">
+                <label for="date"><h3>Date:</h3></label>
+                <input type="text" id="date" name="date" value="{{this.date}}" readonly>
+            </div>
+            <div class="textInput">
+                <label for="people"><h3>People:</h3></label>
+                <input type="text" id="people" name="people" value="{{this.people}}">
+            </div>
+            <div class="textInput">
+                <label for="thing"><h3>Thing:</h3></label>
+                <input type="text" id="thing" name="thing" value="{{this.thing}}">
+            </div>
+            <div class="textInput">
+                <label for="place"><h3>Place:</h3></label>
+                <input type="text" id="place" name="place" value="{{this.place}}">
+            </div>
+            <div class="textInput">
+                <label for="description"><h3>Description:</h3></label>
+                <textarea id="description" name="description">{{this.description}}</textarea>
+            </div>
+            <div class="submit">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+        {{/each}}
+    {{else}}
+        <p>No results found</p>
+    {{/if}}
+</section>

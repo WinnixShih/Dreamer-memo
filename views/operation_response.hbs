@@ -1,0 +1,17 @@
+<section class="main">
+    <h2>Method: {{this.method}}</h2>
+    <h4>{{this.message}}</h4>
+    {{#ifEquals this.method "POST"}}
+        <ul>
+            <li>
+                {{!-- ? the this inside the helpers function is change due to --}}
+                {{!-- ? the use of this in function assign, so need to go to --}}
+                {{!-- ? parent level and get the data to display --}}
+                <p>People: {{../people}}</p>
+                <p>Thing: {{../thing}}</p>
+                <p>Place: {{../place}}</p>
+                <p>Description: {{../description}}</p>
+            </li>
+        </ul>
+    {{/ifEquals}}
+</section>

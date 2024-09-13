@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const db = require('./routes/queries')
+const db = require('./routes/queries');
 
 const PORT = 3000;
 const app = express();
@@ -10,7 +10,14 @@ const { engine } = require('express-handlebars');
 app.engine('hbs', engine({
     extname: 'hbs',  // Set extension to .hbs
     layoutsDir: __dirname + '/views/layouts',  // Path to layouts
-    partialsDir: __dirname + '/views/partials' // Path to partials
+    partialsDir: __dirname + '/views/partials', // Path to partials
+    // ? helper function use in the handlebars, since you can't 
+    // ? compare in the handlebars 
+    helpers: {
+        ifEquals: (a, b, options) => {
+            return (a == b) ? options.fn(this) : options.inverse(this);
+        }
+    }
 }));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
@@ -21,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // * if the file in the public
 app.use(express.static('public'));
 
+// * render endpoints
 app.get('/', (req ,res) => {
     res.render('home');
 })
@@ -55,7 +63,8 @@ app.get('/search/all/result', db.getAllDream);
 app.post('/add', db.addDream);
 
 // * editing endpoint
-app.get('/edit', db.editDream)
+app.get('/edit/result', db.editDream)
+app.post('/edit/result', db.editDream)
 
 // * deleting endpoint
 app.delete('/delete', db.deleteDream);
@@ -63,11 +72,11 @@ app.delete('/delete', db.deleteDream);
 
 
 // ? Route not found error
-// app.use((req, res, next) => {
-//     const err = new Error('Page Not found');
-//     err.status = 404;
-//     next(err);
-// })
+app.get('/*', (req, res, next) => {
+    const err = new Error('Page Not found');
+    err.status = 404;
+    next(err);
+})
 
 // ? All error handling
 app.use((err, req, res, next) => {

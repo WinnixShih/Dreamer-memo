@@ -23,7 +23,7 @@ const getDreamByPeople = async (req, res, next) => {
             SELECT * FROM dream
             WHERE people = $1`, [people]);
         if (results.rows.length < 1) {
-            return res.status(204).render('notFound', { message: `Can't find the dream related to ${people}` });
+            return res.status(404).render('notFound', { message: `Can't find the dream related to ${people}` });
         }
         // ? results.rows is an array, length cannot directly use, check if it is an array
         res.status(200).render('searchResults', { dreams: results.rows });
@@ -38,12 +38,18 @@ const addDream = async (req, res, next) => {
     const date = new Date();
     const formatter = new Intl.DateTimeFormat('zh-TW', { dateStyle: 'short' });
     const currentDate = formatter.format(date);
-    console.log(currentDate);
     try {
         const results = await  pool.query(`
             INSERT INTO dream (date, people, thing, place, description)
             VALUES ($1, $2, $3, $4, $5) RETURNING *`, [currentDate, people, thing, place, description]);
-        res.status(201).json({ message: "New dream added", dream: results.rows[0] });
+        res.status(201).render('operation_response', {
+            method: "POST", 
+            message: `New dream added on date: ${currentDate}`, 
+            people: people,
+            thing: thing,
+            place: place,
+            description: description
+        });
     } catch (err) {
         next(err);
     }
@@ -51,17 +57,41 @@ const addDream = async (req, res, next) => {
 
 // * edit data
 const editDream = async (req, res, next) => {
-    const { date } = req.query;
-    try {
-        const results = await pool.query(`
-            SELECT * FROM dream
-            WHERE date = $1`, [date]);
-        if (results.rows.length < 1) {
-            return res.status(404).send(`No dream recorded on ${date}`);
+    if (req.method === 'GET') {
+        const { date } = req.query;
+        try {
+            const results = await pool.query(`
+                SELECT * FROM dream
+                WHERE date = $1`, [date]);
+            if (results.rows.length < 1) {
+                return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
+            }
+            res.status(200).render('editResults', { dreams: results.rows });
+        } catch (err) {
+            next(err);
         }
-        res.status(200).json(results.rows);
-    } catch (err) {
-        next(err);
+    } else if (req.method === 'POST') {
+        const { date, people, thing, place, description } = req.body;
+        try {
+            const results = await pool.query(`
+                UPDATE dream
+                SET people = $1, thing = $2, place = $3, description = $4
+                WHERE date = $5
+                RETURNING *`, [people, thing, place, description, date]);
+            if (results.rows.length < 1) {
+                return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
+            }
+            res.status(200).render('operation_response', {
+                method: "POST", 
+                message: `Dream on date: ${date} was modified`, 
+                people: people,
+                thing: thing,
+                place: place,
+                description: description
+            });
+        } catch (err) {
+            next(err);
+        }
     }
 }
 
@@ -76,20 +106,20 @@ const deleteDream = async (req, res, next) => {
                 WHERE id = $1
                 RETURNING *`, [id]);
             if (results.rows.length === 0) {
-                return res.status(404).send(`No dream with id ${id}`);
+                return res.status(404).render('notFound', { message: `No dream with id ${id}` });
             }
-            res.status(200).send(`Dream with id: ${id} was deleted`);
+            res.status(200).render('operation_response', {method: "DELETE", message: `Dream with id: ${id} was deleted`});
         } else if (date) {
             const results = await pool.query(`
                 DELETE FROM dream
                 WHERE date = $1
                 RETURNING *`, [date]);
-            if (results.rows.length === 0) {
-                return res.status(404).send(`No dream on date ${date}`);
+                if (results.rows.length === 0) {
+                return res.status(404).render('notFound', { message: `No dream on date ${date}` });
             }
-            res.status(200).send(`Dream on date: ${date} was deleted`);
+            res.status(200).render('operation_response', {method: "DELETE", message: `Dream on date: ${date} was deleted`});
         } else {
-            res.status(400).send('No id or date provided');
+                return res.status(400).render('notFound', { message: 'No id or date provided' });
         }
     } catch (err) {
         next(err);

@@ -37,38 +37,26 @@ if (deleteTypeElement) {
 const deleteDream = async () => {
     // * get the type of deletion
     const deleteType = document.getElementById('deleteType').value;
+    const deleteTarget = (deleteType === 'date') ? document.getElementById('deleteDateInput').value : document.getElementById('deleteIdInput').value;
     // * 2 ways to delete data, id or date
-    if (deleteType === 'date') {
-        const targetDate = document.getElementById('deleteDateInput').value;
-        if (!targetDate) {
-            alert("No input date to delete");
-            return;
+    if (!deleteTarget) {
+        alert("No input date to delete");
+        return;
+    }
+    try {
+        // ? fetch the url and use the endpoint
+        const response = await fetch(`http://localhost:3000/delete?${deleteType}=${encodeURIComponent(deleteTarget)}`, {
+            method: 'DELETE',
+        });
+        if (response.redirected) {
+            // Redirect to the page rendered by the server (e.g., "notFound" or success page)
+            window.location.href = response.url;
+        } else {
+            const pageContent = await response.text();
+            document.body.innerHTML = pageContent;
         }
-
-        try {
-            // ? fetch the url and use the endpoint
-            const response = await fetch(`http://localhost:3000/delete?date=${encodeURIComponent(targetDate)}`, {
-                method: 'DELETE',
-            });
-            responseReply(response);
-        } catch (err) {
-            alert(`Error: ${err.message}`);
-        }
-    } else {
-        const targetId = document.getElementById('deleteIdInput').value;
-        if (!targetId) {
-            alert("No input id to delete");
-            return;
-        }
-        
-        try {
-            const response = await fetch(`http://localhost:3000/delete?id=${encodeURIComponent(targetId)}`, {
-                method: 'DELETE',
-            });
-            responseReply(response);
-        } catch (err) {
-            alert(`Error: ${err.message}`);
-        }
+    } catch (err) {
+        alert(`Error: ${err.message}`);
     }
 }
 
