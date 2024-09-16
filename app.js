@@ -3,8 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./routes/queries');
 
-// ? Use Render's provided port
-const PORT = process.env.PORT || 3000; 
+// ? Use Render's provided port and base URL
+const PORT = process.env.PORT || 3000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const app = express();
 
 const { engine } = require('express-handlebars');
@@ -28,6 +29,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // * available the file in the public folder, will show the index.html 
 // * if the file in the public
 app.use(express.static('public'));
+
+
+// ? Pass BASE_URL to all templates
+app.use((req, res, next) => {
+    res.locals.baseUrl = BASE_URL;
+    next();
+});
 
 // * render endpoints
 app.get('/', (req ,res) => {
