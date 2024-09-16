@@ -37,7 +37,8 @@ const addDream = async (req, res, next) => {
     const { people, thing, place, description } = req.body;
     const date = new Date();
     const formatter = new Intl.DateTimeFormat('zh-TW', { dateStyle: 'short' });
-    const currentDate = formatter.format(date);
+    // * convert into YYYY-MM-DD format
+    const currentDate = date.toISOString().split('T')[0]; 
     try {
         const results = await  pool.query(`
             INSERT INTO dream (date, people, thing, place, description)
