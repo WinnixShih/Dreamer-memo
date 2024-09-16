@@ -30,7 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // * if the file in the public
 app.use(express.static('public'));
 
-
 // ? Pass BASE_URL to all templates
 app.use((req, res, next) => {
     res.locals.baseUrl = BASE_URL;
@@ -58,10 +57,6 @@ app.get('/delete', (req, res) => {
     res.render('delete');
 })
 
-
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// })
 
 // * searching endpoint
 // ? provided endpoint need to name as the action target in html(hbs)

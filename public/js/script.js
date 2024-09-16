@@ -1,8 +1,6 @@
-const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
-
 const dateElement = document.getElementById('date');
 if (dateElement) {
-    const todayDate = new Date().toLocaleDateString();
+    const todayDate = new Date().toISOString().split('T')[0];
     document.getElementById('date').textContent = todayDate;
 }
 
@@ -47,7 +45,7 @@ const deleteDream = async () => {
     }
     try {
         // ? fetch the url and use the endpoint
-        const response = await fetch(`${BASE_URL}/delete?${deleteType}=${encodeURIComponent(deleteTarget)}`, {
+        const response = await fetch(`${baseUrl}/delete?${deleteType}=${encodeURIComponent(deleteTarget)}`, {
             method: 'DELETE',
         });
         if (response.redirected) {

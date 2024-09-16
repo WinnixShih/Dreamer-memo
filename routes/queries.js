@@ -4,11 +4,12 @@ const pool = require('../connection');
 const getAllDream = async (req, res, next) => {
     try {
         const results = await pool.query(`
-            SELECT * FROM dream
-            ORDER BY date DESC
+            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+            FROM dream
+            ORDER BY date DESC;
             `);
         if (results.rows.length < 1) {
-            return res.status(204).render('notFound', { message: 'No dream recorded yet' });
+            return res.status(404).render('notFound', { message: 'No dream recorded yet' });
         }
         res.status(200).render('searchResults', { dreams: results.rows });
     } catch (err) {
@@ -19,8 +20,11 @@ const getAllDream = async (req, res, next) => {
 const getDreamByPeople = async (req, res, next) => {
     const { people } = req.query;
     try {
+        // ? in order to change the date format, we need to 
+        // ? specific call all the variable and use target date form 
         const results = await pool.query(`
-            SELECT * FROM dream
+            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+            FROM dream
             WHERE people = $1`, [people]);
         if (results.rows.length < 1) {
             return res.status(404).render('notFound', { message: `Can't find the dream related to ${people}` });
@@ -36,11 +40,10 @@ const getDreamByPeople = async (req, res, next) => {
 const addDream = async (req, res, next) => {
     const { people, thing, place, description } = req.body;
     const date = new Date();
-    const formatter = new Intl.DateTimeFormat('zh-TW', { dateStyle: 'short' });
     // * convert into YYYY-MM-DD format
     const currentDate = date.toISOString().split('T')[0]; 
     try {
-        const results = await  pool.query(`
+        const results = await pool.query(`
             INSERT INTO dream (date, people, thing, place, description)
             VALUES ($1, $2, $3, $4, $5) RETURNING *`, [currentDate, people, thing, place, description]);
         res.status(201).render('operation_response', {
@@ -62,7 +65,8 @@ const editDream = async (req, res, next) => {
         const { date } = req.query;
         try {
             const results = await pool.query(`
-                SELECT * FROM dream
+                SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+                FROM dream
                 WHERE date = $1`, [date]);
             if (results.rows.length < 1) {
                 return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
@@ -107,7 +111,7 @@ const deleteDream = async (req, res, next) => {
                 WHERE id = $1
                 RETURNING *`, [id]);
             if (results.rows.length === 0) {
-                return res.status(404).render('notFound', { message: `No dream with id ${id}` });
+                return res.status(404).render('notFound', { message: `No dream recorded with id ${id}` });
             }
             res.status(200).render('operation_response', {method: "DELETE", message: `Dream with id: ${id} was deleted`});
         } else if (date) {
@@ -116,7 +120,7 @@ const deleteDream = async (req, res, next) => {
                 WHERE date = $1
                 RETURNING *`, [date]);
                 if (results.rows.length === 0) {
-                return res.status(404).render('notFound', { message: `No dream on date ${date}` });
+                return res.status(404).render('notFound', { message: `No dream recorded on date ${date}` });
             }
             res.status(200).render('operation_response', {method: "DELETE", message: `Dream on date: ${date} was deleted`});
         } else {
