@@ -1,7 +1,7 @@
 CREATE TABLE dreamer (
     id SERIAL PRIMARY KEY,
     name varchar(30) UNIQUE NOT NULL,
-    password varchar(20) NOT NULL
+    password varchar(255) NOT NULL
 );
 
 CREATE TABLE dream (
