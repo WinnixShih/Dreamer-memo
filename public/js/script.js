@@ -4,18 +4,6 @@ if (dateElement) {
     document.getElementById('date').textContent = todayDate;
 }
 
-const nameElement = document.getElementById('userName');
-if (nameElement) {
-    const userName = 'Chuan';
-    document.getElementById('userName').textContent = userName;
-}
-
-// * input field
-// const searchPeople = () => {
-//     const form = document.getElementById('searchForm');
-//     const people = form.people.value;
-//     console.log(people);
-// }
 
 // * for changing display in the front end, default is showing id input box
 const deleteTypeElement = document.getElementById('deleteType');
@@ -24,11 +12,11 @@ if (deleteTypeElement) {
         // * using function() to use the <this> attribute
         const deleteType = this.value;
         // * showing the require input box
-        if (deleteType === 'id') {
-            document.getElementById('deleteIdBox').style.display = 'block';
+        if (deleteType === 'people') {
+            document.getElementById('deletePeopleBox').style.display = 'block';
             document.getElementById('deleteDateBox').style.display = 'none';
         } else if (deleteType === 'date') {
-            document.getElementById('deleteIdBox').style.display = 'none';
+            document.getElementById('deletePeopleBox').style.display = 'none';
             document.getElementById('deleteDateBox').style.display = 'block';
         }
     });
@@ -37,10 +25,10 @@ if (deleteTypeElement) {
 const deleteDream = async () => {
     // * get the type of deletion
     const deleteType = document.getElementById('deleteType').value;
-    const deleteTarget = (deleteType === 'date') ? document.getElementById('deleteDateInput').value : document.getElementById('deleteIdInput').value;
-    // * 2 ways to delete data, id or date
+    const deleteTarget = (deleteType === 'date') ? document.getElementById('deleteDateInput').value : document.getElementById('deletePeopleInput').value;
+    // * 2 ways to delete data, people or date
     if (!deleteTarget) {
-        alert("No input date to delete");
+        alert("No input data to delete");
         return;
     }
     try {
@@ -49,7 +37,7 @@ const deleteDream = async () => {
             method: 'DELETE',
         });
         if (response.redirected) {
-            // Redirect to the page rendered by the server (e.g., "notFound" or success page)
+            // * Redirect to the page rendered by the server (e.g., "notFound" or success page)
             window.location.href = response.url;
         } else {
             const pageContent = await response.text();

@@ -1,5 +1,10 @@
 <div class="welcome">
     <h1>Welcome</h1>
     <h2 id="date"></h2>
-    <h3>你好 <span id="userName"></span></h3>
+    <h3>你好 <span id="userName">
+        {{#if userName}}
+            {{userName}}
+        {{else}}Dreamer
+        {{/if}}
+    </span></h3>
 </div>

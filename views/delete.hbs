@@ -7,18 +7,18 @@
                 <!-- * choosing delete type using select dropbox -->
                 <label for="deleteType"><h3>刪除方式:</h3></label>
                 <select id="deleteType">
-                    <option value="id">id</option>
+                    <option value="people">人物</option>
                     <option value="date">date</option>
                 </select>
 
                 {{!-- * dynamic showing input box --}}
-                <div class="textInput" id="deleteIdBox" style="display: block;">
-                    <label for="deleteId"><h3>id:</h3></label>
-                    <input type="text" id="deleteIdInput" name="id" placeholder="刪除夢境id...">
+                <div class="textInput" id="deletePeopleBox" style="display: block;">
+                    <label for="deletePeople"><h3>人物:</h3></label>
+                    <input type="text" id="deletePeopleInput" name="people" placeholder="刪除關於人物的夢...">
                 </div>
                 <div class="textInput" id="deleteDateBox" style="display: none;">
                     <label for="deleteDate"><h3>日期:</h3></label>
-                    <input type="text" id="deleteDateInput" name="date" placeholder="刪除夢境日期...">
+                    <input type="text" id="deleteDateInput" name="date" placeholder="刪除日期的夢...">
                 </div>
                 
                 <div class="submit">

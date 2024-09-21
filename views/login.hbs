@@ -1,0 +1,17 @@
+<section class="main">
+    <h2>登入</h2>
+    <div class="btn">
+        <a href="{{baseUrl}}/register">註冊</a>
+    </div>
+    <form action="{{baseUrl}}/login" method="POST">
+        <div class="textInput">
+            <label for="username">名稱</label>
+            <input type="text" id="username" name="username">
+            <label for="password">密碼</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="submit">
+            <button type="submit" id="login">登入</button>
+        </div>
+    </form>
+</section>

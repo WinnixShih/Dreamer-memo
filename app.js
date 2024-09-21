@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./routes/queries');
+const auth = require('./routes/auth');
+const cookieParser = require('cookie-parser');
 
 // ? Use Render's provided port and base URL
 const PORT = process.env.PORT || 3000;
@@ -29,16 +31,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // * available the file in the public folder, will show the index.html 
 // * if the file in the public
 app.use(express.static('public'));
+app.use(cookieParser());
 
 // ? Pass BASE_URL to all templates
 app.use((req, res, next) => {
     res.locals.baseUrl = BASE_URL;
     next();
 });
+// ? show login info
+app.use(auth.authenticateLogin);
 
 // * render endpoints
 app.get('/', (req ,res) => {
     res.render('home');
+})
+
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+
+app.get('/register', (req, res) => {
+    res.render('register');
 })
 
 app.get('/add', (req, res) => {
@@ -57,22 +70,31 @@ app.get('/delete', (req, res) => {
     res.render('delete');
 })
 
+// * endpoint action
+
+// * register endpoint
+app.post('/register', auth.registerDreamer);
+
+// * login/logout endpoint
+app.post('/login', auth.loginDreamer);
+app.post('/logout', auth.logoutDreamer);
+
+app.get('/logout', auth.logoutDreamer);
 
 // * searching endpoint
 // ? provided endpoint need to name as the action target in html(hbs)
-app.get('/search/result', db.getDreamByPeople);
-app.get('/search/all/result', db.getAllDream);
+app.get('/search/result', auth.authenticateOperationToken, db.getDreamByPeople);
+app.get('/search/all/result', auth.authenticateOperationToken, db.getAllDream);
 
 // * adding endpoint
-app.post('/add', db.addDream);
+app.post('/add', auth.authenticateOperationToken, db.addDream);
 
 // * editing endpoint
-app.get('/edit/result', db.editDream)
-app.post('/edit/result', db.editDream)
+app.get('/edit/result', auth.authenticateOperationToken, db.editDream)
+app.post('/edit/result', auth.authenticateOperationToken, db.editDream)
 
 // * deleting endpoint
-app.delete('/delete', db.deleteDream);
-
+app.delete('/delete', auth.authenticateOperationToken, db.deleteDream);
 
 
 // ? Route not found error

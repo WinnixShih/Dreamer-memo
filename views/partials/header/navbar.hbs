@@ -17,6 +17,13 @@
                 <li>
                     <a href="/delete">刪除</a>
                 </li>
+                <li>
+                    {{#if areLogin}}
+                        <a href="/logout">登出</a>
+                    {{else}}
+                        <a href="/login">登入</a>   
+                    {{/if}}
+                </li>
             </ul>
         </nav>
     </div>
