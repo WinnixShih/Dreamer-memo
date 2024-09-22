@@ -15,7 +15,7 @@ const registerDreamer = async (req, res, next) => {
         res.status(201).render('successResponse', { message: 'New dreamer created!'});
     } catch(err) {
         if (err.code === '23505') {
-            res.status(400).render('errorResponse', { message: 'User name already exist, please name a new one'});
+            return res.status(400).render('errorResponse', { message: 'User name already exist, please name a new one'});
         }
         next(err);
     }

@@ -47,13 +47,3 @@ const deleteDream = async () => {
         alert(`Error: ${err.message}`);
     }
 }
-
-const responseReply = async (response) => {
-    if (response.ok) {
-        alert('Deleted dream successfully')
-    } else {
-        const message = await response.text()
-        alert(message);
-    }
-    return;
-}

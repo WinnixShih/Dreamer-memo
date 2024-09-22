@@ -47,7 +47,7 @@ const addDream = async (req, res, next) => {
             INSERT INTO dream (date, people, thing, place, description, dreamer_id)
             VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [currentDate, people, thing, place, description, req.userId]);
         res.status(201).render('operation_response', {
-            method: "POST", 
+            method: "新增", 
             message: `New dream added on date: ${currentDate}`, 
             people: people,
             thing: thing,
@@ -87,7 +87,7 @@ const editDream = async (req, res, next) => {
                 return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
             }
             res.status(200).render('operation_response', {
-                method: "POST", 
+                method: "編輯", 
                 message: `Dream on date: ${date} was modified`, 
                 people: people,
                 thing: thing,
@@ -113,7 +113,7 @@ const deleteDream = async (req, res, next) => {
             if (results.rows.length === 0) {
                 return res.status(404).render('notFound', { message: `No dream recorded with people ${people}` });
             }
-            res.status(200).render('operation_response', {method: "DELETE", message: `Dream with id: ${people} was deleted`});
+            res.status(200).render('operation_response', {method: "刪除", message: `Dream with id: ${people} was deleted`});
         } else if (date) {
             const results = await pool.query(`
                 DELETE FROM dream
@@ -122,7 +122,7 @@ const deleteDream = async (req, res, next) => {
                 if (results.rows.length === 0) {
                 return res.status(404).render('notFound', { message: `No dream recorded on date ${date}` });
             }
-            res.status(200).render('operation_response', {method: "DELETE", message: `Dream on date: ${date} was deleted`});
+            res.status(200).render('operation_response', {method: "刪除", message: `Dream on date: ${date} was deleted`});
         } else {
                 return res.status(400).render('notFound', { message: 'No people or date provided' });
         }

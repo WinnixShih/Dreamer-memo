@@ -1,22 +1,22 @@
-<section class="main">    
+<div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
     {{!-- * Searching part --}}
-    <h2>---搜尋夢境---</h2>
-    <div class="input">
-        {{!-- * Get all dreams --}}
-        {{!-- ? action hit the new route and render new page for display results data --}}
-        <form id="all" action="{{baseUrl}}/search/all/result" method="GET">
+    <h2 class="title is-3 has-text-centered CRUD-title">搜尋夢境</h2>
+    {{!-- * Get all dreams --}}
+    {{!-- ? action hit the new route and render new page for display results data --}}
+    <form id="all" action="{{baseUrl}}/search/all/result" method="GET">
+        <div class="submit">
+            <button type="submit" id="submitBtn" class="button is-responsive">查看所有夢境</button>
+        </div>
+    </form>
+    <form id="searchForm" action="{{baseUrl}}/search/result" method="GET">
+        <div class="field">
+            <label for="people" class="label is-size-5 CRUD-subtitle">依人物搜尋:</label>
+            <input type="text" id="people" name="people" class="input is-normal is-size-5" placeholder="Search...">
+        </div>
+        <div class="btn-row right-side">
             <div class="submit">
-                <button type="submit" id="submitBtn">查看所有夢境</button>
+                <button type="submit" id="submitBtn" class="button is-responsive">送出</button>
             </div>
-        </form>
-        <form id="searchForm" action="{{baseUrl}}/search/result" method="GET">
-            <div class="textInput">
-                <label for="people"><h3>依人物搜尋:</h3></label>
-                <input type="text" id="people" name="people" placeholder="Search...">
-            </div>
-            <div class="submit">
-                <button type="submit" id="submitBtn">送出</button>
-            </div>
-        </form>
-    </div>
-</section>
+        </div>
+    </form>
+</div>

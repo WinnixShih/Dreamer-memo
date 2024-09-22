@@ -1,30 +1,34 @@
-<section class="main">    
+<div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
     {{!-- * deleting dream --}}
-    <h2>---刪除夢境---</h2>
-    <div class="input">
-        <form id="delete">
-            <div class="selectInput">
-                <!-- * choosing delete type using select dropbox -->
-                <label for="deleteType"><h3>刪除方式:</h3></label>
-                <select id="deleteType">
+    <h2 class="title is-3 has-text-centered CRUD-title">刪除夢境</h2>
+    <form id="delete">
+        <div class="deleteType">
+            <label for="deleteType" class="label is-size-5 CRUD-subtitle">刪除方式:</label>
+        </div>
+        {{!-- * choosing delete type using select dropbox --}}
+        <div class="select-delete-type">
+            <div class="select is-danger">
+                <select id="deleteType" class="is-focus">
                     <option value="people">人物</option>
-                    <option value="date">date</option>
+                    <option value="date">日期</option>
                 </select>
-
-                {{!-- * dynamic showing input box --}}
-                <div class="textInput" id="deletePeopleBox" style="display: block;">
-                    <label for="deletePeople"><h3>人物:</h3></label>
-                    <input type="text" id="deletePeopleInput" name="people" placeholder="刪除關於人物的夢...">
-                </div>
-                <div class="textInput" id="deleteDateBox" style="display: none;">
-                    <label for="deleteDate"><h3>日期:</h3></label>
-                    <input type="text" id="deleteDateInput" name="date" placeholder="刪除日期的夢...">
-                </div>
-                
-                <div class="submit">
-                    <button type="button" onclick="deleteDream()">刪除</button>
-                </div>
             </div>
-        </form>
-    </div>
-</section>
+        </div>
+
+        {{!-- * dynamic showing input box --}}
+        <div class="field" id="deletePeopleBox" style="display: block;">
+            <label for="deletePeople" class="label is-size-5 CRUD-subtitle">人物:</label>
+            <input type="text" id="deletePeopleInput" name="people" class="input is-size-5" placeholder="刪除關於人物的夢...">
+        </div>
+        <div class="field" id="deleteDateBox" style="display: none;">
+            <label for="deleteDate" class="label is-size-5 CRUD-subtitle">日期:</label>
+            <input type="text" id="deleteDateInput" name="date" class="input is-size-5" placeholder="刪除在日期的夢...">
+        </div>
+        
+        <div class="btn-row right-side">
+            <div class="submit">
+                <button type="button" class="button is-responsive" onclick="deleteDream()">刪除</button>
+            </div>
+        </div>
+    </form>
+</div>

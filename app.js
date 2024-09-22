@@ -107,7 +107,7 @@ app.get('/*', (req, res, next) => {
 // ? All error handling
 app.use((err, req, res, next) => {
     console.error(`Error: ${err.message}`);
-    res.status(err.status || 500).send(err.message ||'Internal Server Error');
+    res.status(err.status || 500).render('errorResponse', { status: err.status, message: err.message ||'Internal Server Error' });
 })
 
 app.listen(PORT, console.log(`App is now listening on ${PORT}`));

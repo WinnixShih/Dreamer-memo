@@ -1,34 +1,32 @@
-<section class="main">
-    <h2>Edit Dream</h2>
-    {{#if dreams.length}}
-        {{#each dreams}}
-        <form id="editDreamForm" action="{{baseUrl}}/edit/result" method="POST">
-            <div class="textInput">
-                <label for="date"><h3>Date:</h3></label>
-                <input type="text" id="date" name="date" value="{{this.date}}" readonly>
-            </div>
-            <div class="textInput">
-                <label for="people"><h3>People:</h3></label>
-                <input type="text" id="people" name="people" value="{{this.people}}">
-            </div>
-            <div class="textInput">
-                <label for="thing"><h3>Thing:</h3></label>
-                <input type="text" id="thing" name="thing" value="{{this.thing}}">
-            </div>
-            <div class="textInput">
-                <label for="place"><h3>Place:</h3></label>
-                <input type="text" id="place" name="place" value="{{this.place}}">
-            </div>
-            <div class="textInput">
-                <label for="description"><h3>Description:</h3></label>
-                <textarea id="description" name="description">{{this.description}}</textarea>
-            </div>
-            <div class="submit">
-                <button type="submit">Save Changes</button>
-            </div>
-        </form>
-        {{/each}}
-    {{else}}
-        <p>No results found</p>
-    {{/if}}
-</section>
+<div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+    <h2 class="title is-3 has-text-centered CRUD-title">編輯夢境</h2>
+    <div class="content is-normal">
+        {{#if dreams.length}}
+            {{#each dreams}}
+            <form id="editDreamForm" action="{{baseUrl}}/edit/result" method="POST">
+                <div class="field">
+                    <label for="date" class="label is-size-5 CRUD-subtitle">日期:</label>
+                    <input type="text" id="date" name="date" class="input is-size-5" value="{{this.date}}" readonly>
+                </div>
+                <div class="field">
+                    <label for="people" class="label is-size-5 CRUD-subtitle">人物:</label>
+                    <input type="text" id="people" name="people" class="input is-size-5" value="{{this.people}}">
+                </div>
+                <div class="field">
+                    <label for="place" class="label is-size-5 CRUD-subtitle">地點:</label>
+                    <input type="text" id="place" name="place" class="input is-size-5" value="{{this.place}}">
+                </div>
+                <div class="field">
+                    <label for="description" class="label is-size-5 CRUD-subtitle">內容:</label>
+                    <textarea id="description" name="description" class="textarea is-size-5">{{this.description}}</textarea>
+                </div>
+                <div class="submit">
+                    <button type="submit" class="button is-responsive">確認編輯</button>
+                </div>
+            </form>
+            {{/each}}
+        {{else}}
+            <p>無搜尋結果</p>
+        {{/if}}
+    </div>
+</div>

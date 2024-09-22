@@ -1,19 +1,22 @@
-<section class="main">
-    <h2>Search Results for Dreams</h2>
-    {{!-- ? get the results --> dreams (it's an object) get the value using dot notation --}}
-    {{#if dreams.length}}
-        <ul>
-            {{#each dreams}}
-                <li>
-                    <h3>Date: {{this.date}}</h3>
-                    <p>People: {{this.people}}</p>
-                    <p>Thing: {{this.thing}}</p>
-                    <p>Place: {{this.place}}</p>
-                    <p>Description: {{this.description}}</p>
-                </li>
-            {{/each}}
-        </ul>
-    {{else}}
-        <p>No results found</p>
-    {{/if}}
-</section>
+<div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+    <h2 class="title is-3 has-text-centered CRUD-title">夢境搜尋結果</h2>
+    <div class="content is-normal">
+        {{!-- ? get the results --> dreams (it's an object) get the value using dot notation --}}
+        {{#if dreams.length}}
+            <ul>
+                {{#each dreams}}
+                    <li>
+                        <h3 class="subtitle is-4">日期: {{this.date}}</h3>
+                        <div class="dream-content">
+                            <p>人物: {{this.people}}</p>
+                            <p>地點: {{this.place}}</p>
+                            <p>內容: {{this.description}}</p>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <p>No results found</p>
+        {{/if}}
+    </div>
+</div>
