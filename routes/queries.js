@@ -4,7 +4,7 @@ const pool = require('../connection');
 const getAllDream = async (req, res, next) => {
     try {
         const results = await pool.query(`
-            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, place, description
             FROM dream
             WHERE dreamer_id = $1
             ORDER BY date DESC`, [req.userId]);
@@ -23,7 +23,7 @@ const getDreamByPeople = async (req, res, next) => {
         // ? in order to change the date format, we need to 
         // ? specific call all the variable and use target date form 
         const results = await pool.query(`
-            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+            SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, place, description
             FROM dream
             WHERE (dreamer_id = $1 AND people = $2) `, [req.userId, people]);
         if (results.rows.length < 1) {
@@ -38,19 +38,18 @@ const getDreamByPeople = async (req, res, next) => {
 
 // * Add to database
 const addDream = async (req, res, next) => {
-    const { people, thing, place, description } = req.body;
+    const { people, place, description } = req.body;
     const date = new Date();
     // * convert into YYYY-MM-DD format
     const currentDate = date.toISOString().split('T')[0];
     try {
         const results = await pool.query(`
-            INSERT INTO dream (date, people, thing, place, description, dreamer_id)
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [currentDate, people, thing, place, description, req.userId]);
+            INSERT INTO dream (date, people, place, description, dreamer_id)
+            VALUES ($1, $2, $3, $4, $5) RETURNING *`, [currentDate, people, place, description, req.userId]);
         res.status(201).render('operation_response', {
             method: "新增", 
             message: `New dream added on date: ${currentDate}`, 
             people: people,
-            thing: thing,
             place: place,
             description: description
         });
@@ -65,7 +64,7 @@ const editDream = async (req, res, next) => {
         const { date } = req.query;
         try {
             const results = await pool.query(`
-                SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, thing, place, description
+                SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, place, description
                 FROM dream
                 WHERE (dreamer_id = $1 AND date = $2) `, [req.userId, date]);
             if (results.rows.length < 1) {
@@ -76,13 +75,13 @@ const editDream = async (req, res, next) => {
             next(err);
         }
     } else if (req.method === 'POST') {
-        const { date, people, thing, place, description } = req.body;
+        const { date, people, place, description } = req.body;
         try {
             const results = await pool.query(`
                 UPDATE dream
-                SET people = $1, thing = $2, place = $3, description = $4
-                WHERE (dreamer_id = $5 AND date = $6)
-                RETURNING *`, [people, thing, place, description, req.userId, date]);
+                SET people = $1, place = $2, description = $3
+                WHERE (dreamer_id = $4 AND date = $5)
+                RETURNING *`, [people, place, description, req.userId, date]);
             if (results.rows.length < 1) {
                 return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
             }
@@ -90,7 +89,6 @@ const editDream = async (req, res, next) => {
                 method: "編輯", 
                 message: `Dream on date: ${date} was modified`, 
                 people: people,
-                thing: thing,
                 place: place,
                 description: description
             });
