@@ -1,6 +1,9 @@
 <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
     <h2 class="title is-3 has-text-centered CRUD-title">註冊</h2>
-    <form action="{{baseUrl}}/register" method="POST">
+    <a class="button is-link is-rounded" onclick="window.history.back();">
+        <img src="{{baseUrl}}/image/left-arrow-alt-svgrepo-com.svg" alt="Go back">
+        返回</a>
+    <form action="{{baseUrl}}/register" class="box" method="POST">
         <div class="field">
             <label for="username" class="label is-size-5">名稱</label>
             <input type="text" id="username" name="username" class="input is-size-5">

@@ -1,20 +1,30 @@
 <header>
-    <nav class="navbar is-spaced">
-        <div class="navbar-start is-expanded">
-            <a class="navbar-item is-size-4" href="/">Home</a>
-            <a class="navbar-item is-size-4" href="/add">新增</a>
-            <a class="navbar-item is-size-4" href="/search">搜尋</a>
-            <a class="navbar-item is-size-4" href="/edit">編輯</a>
-            <a class="navbar-item is-size-4" href="/delete">刪除</a>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-burger" id="navbar-burger" role="button" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            </a>
         </div>
-        
-        <div class="navbar-end is-expanded">
-            <div class="navbar-item">
-                {{#if areLogin}}
-                    <a class="navbar-item is-size-4 button is-light" href="/logout">登出</a>
-                {{else}}
-                    <a class="navbar-item is-size-4 button" href="/login">登入</a>
-                {{/if}}
+        <div class="navbar-menu" id="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item is-size-4" href="/">Home</a>
+                <a class="navbar-item is-size-4" href="/add">新增</a>
+                <a class="navbar-item is-size-4" href="/search">搜尋</a>
+                <a class="navbar-item is-size-4" href="/edit">編輯</a>
+                <a class="navbar-item is-size-4" href="/delete">刪除</a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    {{#if areLogin}}
+                        <a class="navbar-item is-size-4 button is-light" href="/logout">登出</a>
+                    {{else}}
+                        <a class="navbar-item is-size-4 button" href="/login">登入</a>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </nav>

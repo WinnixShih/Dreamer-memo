@@ -3,7 +3,7 @@
     <div class="content is-normal">
         {{#if dreams.length}}
             {{#each dreams}}
-            <form id="editDreamForm" action="{{baseUrl}}/edit/result" method="POST">
+            <form id="editDreamForm" class="box" action="{{baseUrl}}/edit/result" method="POST">
                 <div class="field">
                     <label for="date" class="label is-size-5 CRUD-subtitle">日期:</label>
                     <input type="text" id="date" name="date" class="input is-size-5" value="{{this.date}}" readonly>

@@ -3,18 +3,26 @@
     <div class="content is-normal">
         {{!-- ? get the results --> dreams (it's an object) get the value using dot notation --}}
         {{#if dreams.length}}
-            <ul>
-                {{#each dreams}}
-                    <li>
-                        <h3 class="subtitle is-4">日期: {{this.date}}</h3>
-                        <div class="dream-content">
-                            <p>人物: {{this.people}}</p>
-                            <p>地點: {{this.place}}</p>
-                            <p>內容: {{this.description}}</p>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
+            <table class="table is-size-4">
+                <thead>
+                    <tr>
+                        <th><abbr title="date">日期</abbr></th>
+                        <th><abbr title="people">人物</abbr></th>
+                        <th><abbr title="place">地點</abbr></th>
+                        <th><abbr title="description">內容</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dreams}}
+                        <tr>
+                            <td>{{this.date}}</td>
+                            <td>{{this.people}}</td>
+                            <td>{{this.place}}</td>
+                            <td>{{this.description}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
         {{else}}
             <p>No results found</p>
         {{/if}}

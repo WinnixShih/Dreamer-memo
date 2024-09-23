@@ -1,162 +1,26 @@
-/* * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    font-family: '微軟正黑體', 'arial', sans-serif;
-}
-
-header {
-    background-color: #cf71af;
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar {
-    width: 100%;
-}
-
-.container {
-    max-width: 1140px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.welcome h1 {
-    font-size: 2.5rem;
-    color: #cf71af;
-}
-
-.welcome h2 {
-    font-size: 1.8rem;
-    color: #6a1b9a;
-    margin-top: 10px;
-}
-
-.welcome h3 {
-    font-size: 1.5rem;
-    color: #333;
-}
-
-#userName {
-    color: #cf71af;
-    font-weight: bold;
-}
-
-.btn {
-    margin: 20px 0;
-}
-
-.btn-primary {
-    background-color: #cf71af;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #e295c1;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-}
-
-nav ul li {
-    margin: 0 20px;
-}
-
-nav ul li a {
-    color: #e295c1;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #fff;
-    background-color: #e295c1;
-    border-radius: 5px;
-}
-
-.nav-right {
-    margin-left: auto;
-}
-
-.submit {
-    margin-top: 20px;
-}
-
-.submit button {
-    background-color: #cf71af;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit button:hover {
-    background-color: #e295c1;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-
-    .form-control {
-        font-size: 1rem;
-    }
-
-    .welcome h1 {
-        font-size: 2rem;
-    }
-
-    .welcome h2, .welcome h3 {
-        font-size: 1.2rem;
-    }
-
-    .btn-primary {
-        padding: 8px 16px;
-    }
-} */
-
 .container{
     padding-top: 24px;
 }
 
 .navbar{
+    border-bottom: none;
+    box-shadow: none;
     background-color: #e295c1;
 }
 
 .navbar-start, .navbar-end{
     padding: 0 10%;
+}
+
+.navbar-menu{
+    background-color: rgba(226, 149, 193, 0.5);
+}
+
+.navbar-burger{
+    color: #1D6A3E;
+}
+.navbar-burger:hover{
+    color: #1D6A3E;
 }
 
 .navbar-item{
@@ -196,7 +60,7 @@ nav ul li a:hover {
     color: #4CAF50;
 }
 
-label.CRUD-subtitle{
+label{
     margin: 10px 0;
 }
 
@@ -214,6 +78,15 @@ select option{
     color: red ;
 }
 
+thead th abbr{
+    color: #1D6A3E;
+}
+.table td {
+    max-width: 200px; /* Adjust the max width as needed */
+    word-wrap: break-word; /* Allows long words to break and wrap to the next line */
+    overflow-wrap: break-word; /* Similar to word-wrap */
+}
+
 .deleteType{
     display: block;
 }
@@ -224,7 +97,8 @@ select option{
     align-items: flex-end;
 }
 
-.button{
+.button, .button.is-link{
+    background-color: #fff;
     color: #e295c1;
     border: solid 2px #e295c1;
     transition: all 0.3s ease;
@@ -232,7 +106,12 @@ select option{
     margin: 20px 0;
 }
 
-.button:hover{
+.button img {
+    height: 2em; 
+    margin-right: 8px; /* space between image and text */
+}
+
+.button:hover, .button.is-link:hover{
     background-color: #e295c1;
     color: #1D6A3E;
     border: solid 2px #e295c1;
@@ -242,11 +121,17 @@ select option{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 15%;
+    gap: 15px;
 }
 
 .content ul{
     list-style-type: none;
+}
+.content h3{
+    background-color: #e295c1;
+    border-radius: 4px;
+    text-align: center;
+    padding: 4px;
 }
 .content p{
     font-weight: 500;

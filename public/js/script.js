@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.getElementById('navbar-burger');
+    const menu = document.getElementById('navbar-menu');
+
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+    });
+});
+
+
 const dateElement = document.getElementById('date');
 if (dateElement) {
     const todayDate = new Date().toISOString().split('T')[0];
