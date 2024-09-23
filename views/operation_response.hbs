@@ -1,17 +1,20 @@
 <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
     <h2 class="title is-3 has-text-centered CRUD-title">{{this.method}}成功</h2>
-    {{!-- <h4>{{this.message}}</h4> --}}
+    <a class="button is-link is-rounded" href="/">
+        <img src="{{baseUrl}}/image/home-svgrepo-com.svg" alt="Go back">
+        主頁</a>
     <div class="content is-normal">
-    {{#ifEquals this.method "POST"}}
+    {{#ifEquals this.method "新增"}}
         <ul>
             <li>
                 {{!-- ? the this inside the helpers function is change due to --}}
                 {{!-- ? the use of this in function assign, so need to go to --}}
                 {{!-- ? parent level and get the data to display --}}
-                <div class="dream-content">
-                    <p>人物: {{../people}}</p>
-                    <p>地點: {{../place}}</p>
-                    <p>內容: {{../description}}</p>
+                <div class="box">
+                    <h3 class="is-size-4">{{../date}}</h3>
+                    <p class="is-size-5">人物: {{../people}}</p>
+                    <p class="is-size-5">地點: {{../place}}</p>
+                    <p class="is-size-5">內容: {{../description}}</p>
                 </div>
             </li>
         </ul>

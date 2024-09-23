@@ -47,6 +47,9 @@ const authenticateLogin = async (req, res, next) => {
     const token = req.cookies.token;
     res.locals.areLogin = false;
     // ? if no login yet, skip
+    if (req.path === '/logout') {
+        return next();
+    }
     if (!token) {
         return next();
     }
@@ -84,9 +87,15 @@ const authenticateOperationToken = (req, res, next) => {
 
 
 const logoutDreamer = (req, res, next) => {
-    res.clearCookie('token');
+    // Clear the cookie by matching the name and options used during login
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // Same as when the cookie was set
+        sameSite: 'Strict'
+    });
     res.redirect('/');
-}
+};
+
 
 
 module.exports = {

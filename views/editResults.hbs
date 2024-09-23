@@ -2,29 +2,35 @@
     <h2 class="title is-3 has-text-centered CRUD-title">編輯夢境</h2>
     <div class="content is-normal">
         {{#if dreams.length}}
-            {{#each dreams}}
-            <form id="editDreamForm" class="box" action="{{baseUrl}}/edit/result" method="POST">
-                <div class="field">
-                    <label for="date" class="label is-size-5 CRUD-subtitle">日期:</label>
-                    <input type="text" id="date" name="date" class="input is-size-5" value="{{this.date}}" readonly>
+            <div class="columns is-multiline">
+                {{#each dreams}}
+                <div class="column is-6-tablet is-4-desktop">
+                    <form id="editDreamForm" class="box dream-box" action="{{baseUrl}}/edit/result" method="POST">
+                        <div class="dream-info">
+                            <p class="dream_id is-size-5"><span>{{this.id}}</span></p>
+                            <p class="dream_date is-size-5"><span>{{this.date}}</span></p>
+                        </div>
+                        <div class="field">
+                            <input type="hidden" name="dream_id" value="{{this.id}}">
+                            <input type="hidden" name="dream_date" value="{{this.date}}">
+                            <label for="people" class="label is-size-5 CRUD-subtitle">人物:</label>
+                            <input type="text" id="people" name="people" class="input is-size-5" value="{{this.people}}">
+                        </div>
+                        <div class="field">
+                            <label for="place" class="label is-size-5 CRUD-subtitle">地點:</label>
+                            <input type="text" id="place" name="place" class="input is-size-5" value="{{this.place}}">
+                        </div>
+                        <div class="field">
+                            <label for="description" class="label is-size-5 CRUD-subtitle">內容:</label>
+                            <textarea id="description" name="description" class="textarea is-size-5">{{this.description}}</textarea>
+                        </div>
+                        <div class="submit">
+                            <button type="submit" class="button is-responsive">確認編輯</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="field">
-                    <label for="people" class="label is-size-5 CRUD-subtitle">人物:</label>
-                    <input type="text" id="people" name="people" class="input is-size-5" value="{{this.people}}">
-                </div>
-                <div class="field">
-                    <label for="place" class="label is-size-5 CRUD-subtitle">地點:</label>
-                    <input type="text" id="place" name="place" class="input is-size-5" value="{{this.place}}">
-                </div>
-                <div class="field">
-                    <label for="description" class="label is-size-5 CRUD-subtitle">內容:</label>
-                    <textarea id="description" name="description" class="textarea is-size-5">{{this.description}}</textarea>
-                </div>
-                <div class="submit">
-                    <button type="submit" class="button is-responsive">確認編輯</button>
-                </div>
-            </form>
-            {{/each}}
+                {{/each}}
+            </div>
         {{else}}
             <p>無搜尋結果</p>
         {{/if}}

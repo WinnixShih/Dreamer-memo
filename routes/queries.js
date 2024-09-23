@@ -48,7 +48,7 @@ const addDream = async (req, res, next) => {
             VALUES ($1, $2, $3, $4, $5) RETURNING *`, [currentDate, people, place, description, req.userId]);
         res.status(201).render('operation_response', {
             method: "新增", 
-            message: `New dream added on date: ${currentDate}`, 
+            date: currentDate, 
             people: people,
             place: place,
             description: description
@@ -64,9 +64,10 @@ const editDream = async (req, res, next) => {
         const { date } = req.query;
         try {
             const results = await pool.query(`
-                SELECT TO_CHAR(date, 'YYYY-MM-DD') AS date, people, place, description
+                SELECT id, TO_CHAR(date, 'YYYY-MM-DD') AS date, people, place, description
                 FROM dream
-                WHERE (dreamer_id = $1 AND date = $2) `, [req.userId, date]);
+                WHERE (dreamer_id = $1 AND date = $2)
+                ORDER BY id DESC`, [req.userId, date]);
             if (results.rows.length < 1) {
                 return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
             }
@@ -75,19 +76,19 @@ const editDream = async (req, res, next) => {
             next(err);
         }
     } else if (req.method === 'POST') {
-        const { date, people, place, description } = req.body;
+        const { dream_id, dream_date, people, place, description } = req.body;
         try {
             const results = await pool.query(`
                 UPDATE dream
                 SET people = $1, place = $2, description = $3
-                WHERE (dreamer_id = $4 AND date = $5)
-                RETURNING *`, [people, place, description, req.userId, date]);
+                WHERE (id = $4)
+                RETURNING *`, [people, place, description, dream_id]);
             if (results.rows.length < 1) {
-                return res.status(404).render('notFound', { message: `No dream recorded on ${date}` });
+                return res.status(404).render('notFound', { message: `No dream recorded on ${dream_date}` });
             }
             res.status(200).render('operation_response', {
                 method: "編輯", 
-                message: `Dream on date: ${date} was modified`, 
+                date: dream_date, 
                 people: people,
                 place: place,
                 description: description

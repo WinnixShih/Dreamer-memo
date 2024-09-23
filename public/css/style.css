@@ -8,6 +8,8 @@
     background-color: #e295c1;
 }
 
+
+
 .navbar-start, .navbar-end{
     padding: 0 10%;
 }
@@ -26,6 +28,7 @@
 .navbar-item{
     color: #fff;
     font-weight: 600;
+    transition: all 0.25s ease;
 }
 
 .navbar .navbar-item:hover{
@@ -35,6 +38,21 @@
 .navbar .button:hover{
     color: #1D6A3E;
     background-color: #fff;
+}
+
+.navbar-icon{
+    margin: 0 -50px 0 50px;
+}
+@media (max-width: 1023px) {
+    .navbar-icon{
+        margin: 0 30px 0 30px
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-icon{
+        margin: 0 10px 0 10px
+    }
 }
 
 .CRUD-title{
@@ -106,7 +124,7 @@ thead th abbr{
     margin: 20px 0;
 }
 
-.button img {
+.container .button img {
     height: 2em; 
     margin-right: 8px; /* space between image and text */
 }
@@ -140,4 +158,21 @@ thead th abbr{
 .content .dream-content{
     text-align: center;
     margin: 20px 0;
+}
+
+.dream_id span{
+    border-radius: 20px;
+    padding: 0.25rem;
+    /* border: solid 2px #e295c1; */
+    background-color: #e295c1;
+    color: #fff;
+}
+.dream-info {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.columns{
+    margin: 4px;
 }
