@@ -1,6 +1,39 @@
-# Dreamer-memo
-### Better way to recorded your dream in the morning, with Dreamer memo Web App, you can memorize you dream before you forget!
-- *Front-end*: Using Bulma structure for css design, handlebars for different pages render
-- *Back-end*: Javascript Node & express for deploy different routes and endpoints
-- *Database*: Postgres
-- *PaaS*: Deploy service on Render
+# ***Dreamer-memo***
+
+> ### *Better way to recorded your dream in the morning, with Dreamer memo Web App, you can memorize you dream before you forget!*
+
+## **Motivation**: 
+在大二時，我對夢境產生了濃厚的興趣，尤其是「清醒夢」這個概念深深吸引了我。清醒夢指的是在夢中意識到自己正在作夢，並且能夠自由地操控夢境內容，將腦海中的想像具體實現。這樣的想法令我著迷，因此展開了對清醒夢的研究。
+
+在研究過程中，我發現有文章提到，經常記錄夢境能有效提升做清醒夢的機率。因此，我開始利用手機記事本每天早晨記錄夢境。雖然一開始非常有用，但隨著記錄越來越多，記事本變得雜亂無章，最終我無法持續這個習慣。
+
+後來，當我學習了後端開發的相關知識後，我便想打造一款系統化工具的想法，讓夢境記錄更加方便且有條理。於是，Dreamer Memo 這款專屬於夢境記錄的網頁應用程式便誕生了。
+## **How to use**:
+- 創建帳號並登入：
+註冊一個帳號並登入，開啟專屬於你的夢境紀錄旅程。
+
+- 新增夢境：
+進入「新增」頁面，填寫夢境的內容，包括夢中的人物、地點以及詳細描述，並將其儲存。
+
+- 搜尋夢境：
+在「搜尋」頁面中，透過人物名稱篩選特定夢境，或直接瀏覽所有已記錄的夢境。
+
+- 編輯夢境：
+進入「編輯」頁面，依日期搜尋夢境，修改內容，保持記錄的更新。
+
+- 刪除夢境：
+使用「刪除」功能，依據人物或日期篩選條件，移除符合條件的夢境記錄。
+
+## **Implementation**:
+
+### *Front-end*: 
+採用 Bulma 框架設計網頁介面，並使用 Handlebars 進行頁面渲染。整體設計以手機介面為主，但也實現了響應式設計，能夠在電腦和平板上流暢呈現。
+
+### *Back-end*: 
+使用 JavaScript 實作程式邏輯，並採用 Express.js 建立 RESTful API，實現新增、刪除、修改、查詢（CRUD）功能。
+
+### *Database*: 
+設計dreamer和dream的資料架構，利用Postgres database創建和管理資料。
+
+### *Deploy*: 
+利用 Render 平台進行應用部署，同時採用平台內建的 PostgreSQL 資料庫進行資料儲存與管理。
