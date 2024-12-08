@@ -1,5 +1,6 @@
 # ***Dreamer-memo***
-
+## *https://dreamer-memo.onrender.com/*
+(該頁面可能需要一點時間跑出來)
 > ### *Better way to recorded your dream in the morning, with Dreamer memo Web App, you can memorize you dream before you forget!*
 
 ## **Motivation**: 
